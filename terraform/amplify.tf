@@ -1,13 +1,16 @@
 resource "aws_amplify_app" "bertila" {
-  name         = var.app_name
-  repository   = var.github_repo
-  access_token = var.github_token
+  name                 = var.app_name
+  repository           = var.github_repo
+  access_token         = var.github_token
+  iam_service_role_arn = aws_iam_role.amplify.arn
 
   enable_auto_branch_creation = false
   enable_branch_auto_build    = true
   enable_branch_auto_deletion = false
 
-  platform = "WEB_COMPUTE"
+  # WEB = static hosting on S3/CloudFront (cheapest tier). The Next.js app
+  # uses output:"export" so every route is prerendered to plain HTML/JS.
+  platform = "WEB"
 
   build_spec = <<-EOT
     version: 1
@@ -22,7 +25,7 @@ resource "aws_amplify_app" "bertila" {
               commands:
                 - npm run build
           artifacts:
-            baseDirectory: .next
+            baseDirectory: out
             files:
               - '**/*'
           cache:
@@ -40,7 +43,6 @@ resource "aws_amplify_app" "bertila" {
   environment_variables = {
     AMPLIFY_DIFF_DEPLOY       = "false"
     AMPLIFY_MONOREPO_APP_ROOT = "app"
-    _LIVE_UPDATES             = jsonencode([{ name = "Next.js version", pkg = "next-version", type = "internal", version = "latest" }])
   }
 }
 
@@ -50,7 +52,7 @@ resource "aws_amplify_branch" "main" {
 
   enable_auto_build = true
   stage             = "PRODUCTION"
-  framework         = "Next.js - SSR"
+  framework         = "Next.js - SSG"
 }
 
 resource "aws_amplify_domain_association" "bertila" {
@@ -58,6 +60,11 @@ resource "aws_amplify_domain_association" "bertila" {
 
   app_id      = aws_amplify_app.bertila.id
   domain_name = var.domain_name
+
+  # Don't block terraform on certificate verification — ACM can only validate
+  # once the nameservers point to this Route53 zone (either via NS change at
+  # the current registrar or after the domain transfer completes).
+  wait_for_verification = false
 
   sub_domain {
     branch_name = aws_amplify_branch.main.branch_name

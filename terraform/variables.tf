@@ -32,3 +32,9 @@ variable "app_name" {
   type        = string
   default     = "bertila"
 }
+
+variable "budget_alert_email" {
+  description = "Email that receives the monthly budget alerts (80% actual + 100% forecast)."
+  type        = string
+  default     = "bertypala@gmail.com"
+}

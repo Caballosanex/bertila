@@ -5,45 +5,62 @@ resource "aws_route53_zone" "bertila" {
   comment = "Hosted zone for ${var.domain_name} — managed by Terraform"
 }
 
+# Amplify exposes the certificate-validation DNS record as a single
+# space-separated string: "<name> <type> <value>".
+locals {
+  amplify_cert_parts = var.enable_custom_domain ? split(" ", aws_amplify_domain_association.bertila[0].certificate_verification_dns_record) : []
+
+  # Apex / www CNAME target (CloudFront distribution that Amplify provisions).
+  amplify_apex_target = var.enable_custom_domain ? trimsuffix(
+    split(" ", [for sd in aws_amplify_domain_association.bertila[0].sub_domain : sd.dns_record if sd.prefix == ""][0])[2],
+    ".",
+  ) : ""
+
+  amplify_www_target = var.enable_custom_domain ? trimsuffix(
+    split(" ", [for sd in aws_amplify_domain_association.bertila[0].sub_domain : sd.dns_record if sd.prefix == "www"][0])[2],
+    ".",
+  ) : ""
+}
+
 resource "aws_route53_record" "amplify_verification" {
-  for_each = var.enable_custom_domain ? {
-    for dvo in aws_amplify_domain_association.bertila[0].certificate_verification_dns_record :
-    dvo => dvo
-  } : {}
+  count = var.enable_custom_domain ? 1 : 0
 
   zone_id = aws_route53_zone.bertila[0].zone_id
-  name    = split(" ", each.value)[0]
-  type    = split(" ", each.value)[1]
-  records = [trimsuffix(split(" ", each.value)[2], ".")]
+  name    = local.amplify_cert_parts[0]
+  type    = local.amplify_cert_parts[1]
+  records = [trimsuffix(local.amplify_cert_parts[2], ".")]
   ttl     = 300
 
   allow_overwrite = true
 }
 
+# Apex: CNAMEs are NOT allowed at the zone apex in Route53. Use an ALIAS
+# record pointing to the CloudFront distribution Amplify provisions.
+# The CloudFront hosted-zone ID is a fixed AWS-published constant.
 resource "aws_route53_record" "apex" {
-  for_each = var.enable_custom_domain ? {
-    for sd in aws_amplify_domain_association.bertila[0].sub_domain :
-    sd.prefix => sd
-    if sd.prefix == ""
-  } : {}
+  count = var.enable_custom_domain ? 1 : 0
 
   zone_id = aws_route53_zone.bertila[0].zone_id
   name    = var.domain_name
-  type    = "CNAME"
-  records = [each.value.dns_record != "" ? split(" ", each.value.dns_record)[2] : ""]
-  ttl     = 300
+  type    = "A"
+
+  alias {
+    name                   = local.amplify_apex_target
+    zone_id                = "Z2FDTNDATAQYW2" # Global CloudFront hosted zone
+    evaluate_target_health = false
+  }
+
+  allow_overwrite = true
 }
 
 resource "aws_route53_record" "www" {
-  for_each = var.enable_custom_domain ? {
-    for sd in aws_amplify_domain_association.bertila[0].sub_domain :
-    sd.prefix => sd
-    if sd.prefix == "www"
-  } : {}
+  count = var.enable_custom_domain ? 1 : 0
 
   zone_id = aws_route53_zone.bertila[0].zone_id
   name    = "www.${var.domain_name}"
   type    = "CNAME"
-  records = [each.value.dns_record != "" ? split(" ", each.value.dns_record)[2] : ""]
+  records = [local.amplify_www_target]
   ttl     = 300
+
+  allow_overwrite = true
 }
