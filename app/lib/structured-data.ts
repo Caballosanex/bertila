@@ -69,16 +69,6 @@ const FAQ_ITEMS: Record<Lang, Array<{ question: string; answer: string }>> = {
         "La hipoteca inversa es un préstamo hipotecario pensado para mayores de 65 años. La entidad financiera o aseguradora te paga un capital o renta mensual usando tu vivienda como garantía. La deuda se devuelve por los herederos tras el fallecimiento, normalmente vendiendo la casa.",
     },
     {
-      question: "¿Puedo seguir viviendo en mi casa si vendo la nuda propiedad?",
-      answer:
-        "Sí. Al vender solo la nuda propiedad conservas el usufructo vitalicio, lo que te da derecho a vivir en la vivienda toda la vida. Si en algún momento necesitas dejarla, también puedes alquilarla.",
-    },
-    {
-      question: "¿Puedo cobrar una renta vitalicia por mi vivienda?",
-      answer:
-        "Sí. Al vender la nuda propiedad puedes elegir cobrar el precio como renta vitalicia: en lugar de un único capital, recibes un ingreso mensual garantizado de por vida que complementa tu pensión, sin dejar de vivir en tu casa.",
-    },
-    {
       question: "¿En qué zonas de Cataluña ofreces el servicio?",
       answer:
         "Atiendo en toda Cataluña: Barcelona, Tarragona, Girona y Lleida, incluidos sus pueblos y comarcas. El asesoramiento inicial es siempre sin compromiso.",
@@ -99,16 +89,6 @@ const FAQ_ITEMS: Record<Lang, Array<{ question: string; answer: string }>> = {
       question: "Com funciona la hipoteca inversa?",
       answer:
         "La hipoteca inversa és un préstec hipotecari pensat per a majors de 65 anys. L'entitat financera o asseguradora et paga un capital o renda mensual fent servir la teva vivenda com a garantia. El deute el tornen els hereus després de la mort, normalment venent la casa.",
-    },
-    {
-      question: "Puc seguir vivint a casa meva si venc la nuda propietat?",
-      answer:
-        "Sí. En vendre només la nuda propietat conserves l'usdefruit vitalici, que et dóna dret a viure a la vivenda tota la vida. Si en algun moment l'has de deixar, també la pots llogar.",
-    },
-    {
-      question: "Puc cobrar una renda vitalícia per la meva vivenda?",
-      answer:
-        "Sí. En vendre la nuda propietat pots triar cobrar el preu com a renda vitalícia: en lloc d'un únic capital, reps un ingrés mensual garantit durant tota la vida que complementa la teva pensió, sense deixar de viure a casa teva.",
     },
     {
       question: "A quines zones de Catalunya ofereixes el servei?",
