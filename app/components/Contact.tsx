@@ -77,7 +77,7 @@ export function Contact() {
               <p className="text-sm uppercase tracking-wider text-navy-200">
                 {t("contact.emailLabel")}
               </p>
-              <p className="font-serif text-xl text-white group-hover:text-accent break-all">
+              <p className="font-serif text-base text-white group-hover:text-accent sm:text-lg">
                 {SITE_CONFIG.email}
               </p>
             </div>
