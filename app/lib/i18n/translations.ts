@@ -142,7 +142,7 @@ export const translations: Record<Language, TranslationDict> = {
         {
           question: "¿En qué zonas de Cataluña ofreces el servicio?",
           answer:
-            "Atiendo en toda Cataluña: Barcelona, Tarragona, Girona y Lleida, incluidos sus pueblos y comarcas. El asesoramiento inicial es siempre sin compromiso.",
+            "Trabajo en toda Cataluña, principalmente en Barcelona y su área. También atiendo en Tarragona, Girona y Lleida, incluidos sus pueblos y comarcas. El asesoramiento inicial es siempre sin compromiso.",
         },
       ],
       sourcesTitle: "Fuentes oficiales",
@@ -331,7 +331,7 @@ export const translations: Record<Language, TranslationDict> = {
         {
           question: "A quines zones de Catalunya ofereixes el servei?",
           answer:
-            "Atenc a tota Catalunya: Barcelona, Tarragona, Girona i Lleida, incloent-hi pobles i comarques. L'assessorament inicial sempre és sense compromís.",
+            "Treballo a tota Catalunya, principalment a Barcelona i la seva àrea. També atenc a Tarragona, Girona i Lleida, incloent-hi pobles i comarques. L'assessorament inicial sempre és sense compromís.",
         },
       ],
       sourcesTitle: "Fonts oficials",
