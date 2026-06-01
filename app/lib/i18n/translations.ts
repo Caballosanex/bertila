@@ -173,7 +173,8 @@ export const translations: Record<Language, TranslationDict> = {
       subtitle: "Te informo sin compromiso.",
       callLabel: "Llamar",
       emailLabel: "Escribirme",
-      phone: "+34 610 69 85 23",
+      whatsappLabel: "WhatsApp",
+      phone: "+34 613 51 73 64",
       email: "bertypala@gmail.com",
     },
     footer: {
@@ -362,7 +363,8 @@ export const translations: Record<Language, TranslationDict> = {
       subtitle: "T'informo sense compromís.",
       callLabel: "Trucar",
       emailLabel: "Escriure'm",
-      phone: "+34 610 69 85 23",
+      whatsappLabel: "WhatsApp",
+      phone: "+34 613 51 73 64",
       email: "bertypala@gmail.com",
     },
     footer: {

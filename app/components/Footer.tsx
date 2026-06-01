@@ -91,6 +91,16 @@ export function Footer() {
                 {SITE_CONFIG.email}
               </a>
             </li>
+            <li>
+              <a
+                href={`https://wa.me/${SITE_CONFIG.whatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-navy-200 transition hover:text-accent"
+              >
+                WhatsApp
+              </a>
+            </li>
           </ul>
         </div>
       </div>
