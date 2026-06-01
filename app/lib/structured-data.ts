@@ -14,7 +14,7 @@ const SERVICE_LABELS: Record<Lang, Array<{ name: string; description: string; se
       name: "Venta de nuda propiedad",
       serviceType: "Nuda propiedad",
       description:
-        "Venta de la nuda propiedad de la vivienda conservando el usufructo vitalicio. El propietario sigue viviendo en su casa de por vida y recibe un capital o renta mensual.",
+        "Venta de la nuda propiedad de la vivienda conservando el usufructo vitalicio. El propietario sigue viviendo en su casa de por vida y recibe un capital único o una renta vitalicia mensual.",
     },
     {
       name: "Vivienda inversa",
@@ -34,7 +34,7 @@ const SERVICE_LABELS: Record<Lang, Array<{ name: string; description: string; se
       name: "Venda de nuda propietat",
       serviceType: "Nuda propietat",
       description:
-        "Venda de la nuda propietat de la vivenda conservant l'usdefruit vitalici. El propietari segueix vivint a casa seva tota la vida i rep un capital o renda mensual.",
+        "Venda de la nuda propietat de la vivenda conservant l'usdefruit vitalici. El propietari segueix vivint a casa seva tota la vida i rep un capital únic o una renda vitalícia mensual.",
     },
     {
       name: "Vivenda inversa",
@@ -74,6 +74,11 @@ const FAQ_ITEMS: Record<Lang, Array<{ question: string; answer: string }>> = {
         "Sí. Al vender solo la nuda propiedad conservas el usufructo vitalicio, lo que te da derecho a vivir en la vivienda toda la vida. Si en algún momento necesitas dejarla, también puedes alquilarla.",
     },
     {
+      question: "¿Puedo cobrar una renta vitalicia por mi vivienda?",
+      answer:
+        "Sí. Al vender la nuda propiedad puedes elegir cobrar el precio como renta vitalicia: en lugar de un único capital, recibes un ingreso mensual garantizado de por vida que complementa tu pensión, sin dejar de vivir en tu casa.",
+    },
+    {
       question: "¿En qué zonas de Cataluña ofreces el servicio?",
       answer:
         "Atiendo en toda Cataluña: Barcelona, Tarragona, Girona y Lleida, incluidos sus pueblos y comarcas. El asesoramiento inicial es siempre sin compromiso.",
@@ -99,6 +104,11 @@ const FAQ_ITEMS: Record<Lang, Array<{ question: string; answer: string }>> = {
       question: "Puc seguir vivint a casa meva si venc la nuda propietat?",
       answer:
         "Sí. En vendre només la nuda propietat conserves l'usdefruit vitalici, que et dóna dret a viure a la vivenda tota la vida. Si en algun moment l'has de deixar, també la pots llogar.",
+    },
+    {
+      question: "Puc cobrar una renda vitalícia per la meva vivenda?",
+      answer:
+        "Sí. En vendre la nuda propietat pots triar cobrar el preu com a renda vitalícia: en lloc d'un únic capital, reps un ingrés mensual garantit durant tota la vida que complementa la teva pensió, sense deixar de viure a casa teva.",
     },
     {
       question: "A quines zones de Catalunya ofereixes el servei?",
@@ -149,6 +159,7 @@ export function buildLocalBusinessJsonLd(lang: Lang = "es") {
       "Nuda propiedad",
       "Vivienda inversa",
       "Hipoteca inversa",
+      "Renta vitalicia",
       "Venta con derecho de alquiler",
       "Personas mayores de 65 años",
       "Asesoramiento inmobiliario",
